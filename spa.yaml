@@ -1,0 +1,70 @@
+esphome:
+  name: spa
+  includes:
+    - spa_reader.h
+
+  libraries:
+    - rlogiacco/CircularBuffer
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+uart:
+  id: spa_uart_bus
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  data_bits: 8
+  parity: NONE
+  stop_bits: 1
+  baud_rate: 115200
+  rx_buffer_size: 128
+#  debug:
+#    direction: RX
+#    dummy_receiver: true
+
+sensor:
+- platform: custom
+  lambda: |-
+    auto spareader = new SpaReader(id(spa_uart_bus));
+    App.register_component(spareader);
+    return {spareader->temp_sensor,spareader->target_temp_sensor,spareader->jet1_sensor,spareader->jet2_sensor,spareader->blower_sensor,spareader->light_sensor,spareader->restmode_sensor,spareader->highrange_sensor,spareader->hour_sensor,spareader->minute_sensor};
+
+  sensors:
+  - name: "Current Temp"
+    unit_of_measurement: °F
+    accuracy_decimals: 2
+  - name: "Target Temp"
+    unit_of_measurement: °F
+    accuracy_decimals: 2
+  - name: "Jet1"
+  - name: "Jet2"
+  - name: "Blower"
+  - name: "Light"
+  - name: "Rest Mode"
+  - name: "High Range"
+  - name: "Hour"
+  - name: "Minute"
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_enc_key
+
+ota:
+  password: !secret ota_pw
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Spa Fallback Hotspot"
+    password: !secret ap_fallback_pw
+
+captive_portal:
+    

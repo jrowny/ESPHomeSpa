@@ -23,3 +23,10 @@ TODO:
 
 NOTE:
 - using ESP32 devkit, I use GPIO-17/16
+
+
+A dasboard I made in HomeAssistant
+![HomeAssistant Dashboard](screenshot.png)
+
+A picture of the board in a waterproof box.
+![HomeAssistant Dashboard](spacircuit.jpg)

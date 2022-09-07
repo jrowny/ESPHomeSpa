@@ -29,4 +29,4 @@ A dasboard I made in HomeAssistant
 ![HomeAssistant Dashboard](screenshot.png)
 
 A picture of the board in a waterproof box.
-![HomeAssistant Dashboard](spacircuit.jpg)
+![Spa Circuit](spacircuit.jpg)

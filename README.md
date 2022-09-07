@@ -1,4 +1,4 @@
-#ESPHomeSpa
+# ESPHomeSpa
 
 This is an ESPHome version of Cribskip's esp8266 library, as such, it also runs on ESP32.
 
